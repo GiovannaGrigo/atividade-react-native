@@ -3,45 +3,49 @@ import { View, Text, TextInput, StyleSheet, Button, Image } from 'react-native'
 import { Picker } from '@react-native-picker/picker';
 
 const exercicio = () => {
-  const [tipoVeiculo, setTipoVeiculo] = useState('carro');
-  const [totalPedagio, setTotalPedagio] = useState();
-  const [distanciaKm, setDistanciaKm] = useState();
-  let calculoPedagio;
+  const [tipoBandeira, setTipoBandeira] = useState('v');
+  const [total, setTotal] = useState();
+  const [consumoKW, setConsumoKW] = useState();
+  let calculoTarifa;
   return (
     <View style={styles.container}>
       <View style={styles.containerMeio}>
         <Text>Informe o tipo do seu veículo:</Text>
         <Picker style={styles.selectTipo}
-          selectedValue={tipoVeiculo}
+          selectedValue={tipoBandeira}
           onValueChange={(itemValue, itemIndex) =>
-            setTipoVeiculo(itemValue)
+            setTipoBandeira(itemValue)
           }>
-          <Picker.Item label="Carro" value="carro" />
-          <Picker.Item label="Caminhão" value="caminhao" />
-          <Picker.Item label="Moto" value="moto" />
+          <Picker.Item label="Bandeira verde" value="v" />
+          <Picker.Item label="Bandeira amarela" value="a" />
+          <Picker.Item label="Bandeira vermelha 1" value="vermelho1" />
+          <Picker.Item label="Bandeira vermelha 2" value="vermelho2" />
         </Picker>
-        <TextInput style={styles.distanciaKm} placeholder='Informe a distância percorrida em km!' onChangeText={setDistanciaKm}
+        <TextInput style={styles.consumoKW} placeholder='Informe o consumo total em kWh!' onChangeText={setConsumoKW}
         ></TextInput>
         <View style={styles.resultados}>
-          <Text>O total do seu pedágio é: {totalPedagio}</Text>
+          <Text>O total da sua tarifa é: {total}</Text>
           <Button
             title="Calcular"
             color="green"
             onPress={() => {
-              switch (tipoVeiculo) {
-                case 'carro':
-                  calculoPedagio = 0.10 * distanciaKm;
+              switch (tipoBandeira) {
+                case 'v':
+                  calculoTarifa = consumoKW * 0.5;
                   break;
-                case 'moto':
-                  calculoPedagio = 0.05 * distanciaKm;
+                case 'a':
+                  calculoTarifa = consumoKW * 0.55;
                   break;
-                case 'caminhao':
-                  calculoPedagio = 0.15 * distanciaKm;
+                case 'vermelho1':
+                  calculoTarifa = consumoKW * 0.60;
+                  break;
+                case 'vermelho2':
+                  calculoTarifa = consumoKW * 0.70;
                   break;
                 default:
                   console.warn("oi val");
               }
-              setTotalPedagio(calculoPedagio);
+              setTotal(calculoTarifa);
             }}
           />
         </View>
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
   resultados: {
     alignItems: 'center',
   },
-  distanciaKm: {
+  consumoKW: {
     borderColor: 'darkgray',
     borderWidth: 2,
     borderRadius: 15,
@@ -80,4 +84,4 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   }
 });
-export default exercicio
+export default exercicio  

@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet } from 'react-native';
 
-import Exercicio from './components/Ex4'
+import Exercicio from './components/Ex4';
 
 export default function App() {
   return (
