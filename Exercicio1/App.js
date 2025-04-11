@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet } from 'react-native';
 
-import Exercicio from './components/Ex4';
+import Exercicio from './components/Ex1'; //Altere o número do exercício pra acessar os outros!
 
 export default function App() {
   return (
